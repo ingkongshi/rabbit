@@ -1,0 +1,22 @@
+{
+  "name": "rabbit",
+  "version": "1.0.0",
+  "description": "rabbit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingkongshi/rabbit.git"
+  },
+  "keywords": [
+    "lalala"
+  ],
+  "author": "rabbit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ingkongshi/rabbit/issues"
+  },
+  "homepage": "https://github.com/ingkongshi/rabbit#readme"
+}
