@@ -27,8 +27,9 @@ router.beforeEach(async (to, from, next) => {
   // todo： 未登录或者token 过期  跳转登录页
   if (!token && to.path !== "/login") {
     next({ path: '/login' })
-  } 
-  next();
+  } else {
+    next();
+  }
 });
 
 app.mount("#app");

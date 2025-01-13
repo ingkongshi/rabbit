@@ -2,7 +2,7 @@
     <div>
       <h1>This is an login page</h1>
       <br>
-      <el-form ref="loginFormRef" :model="ruleForm" :rules="rules" label-width="auto" status-icon>
+      <el-form ref="loginFormRef" :model="ruleForm" :rules="rules" status-icon>
         <el-form-item label="账号" prop="account">
             <el-input v-model="ruleForm.account" />
         </el-form-item>

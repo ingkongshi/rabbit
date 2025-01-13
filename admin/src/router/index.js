@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import layout from '../components/layout.vue'
 
-
-const routes = [
+const authRouter = [
   {
     path: '/login',
     name: 'Login',
@@ -11,31 +10,61 @@ const routes = [
     },
     component: () => import('../views/login.vue'),
   },
+]
+const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'HomePage',
+    component: layout,
+    redirect: '/home',
     meta: {
-      title: '首页'
+      title: '首页',
     },
-    component: HomeView,
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import("../views/HomeView.vue"),
+        meta: {
+          title: 'Home',
+        }
+      }
+    ]
   },
   {
-    path: '/about',
+    path: '',
     name: 'about',
+    component: layout,
+    redirect: '/about',
     meta: {
       title: '关于'
     },
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/AboutView.vue'),
+    children: [
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import("../views/AboutView.vue"),
+        meta: {
+          title: '关于',
+          hideMenu: true,
+        }
+      }
+    ]
+  },
+  {
+    path: '/member',
+    name: 'Member',
+    component: () => import("../views/member/member.vue"),
+    meta: {
+      title: '会员'
+    },
   },
 ]
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: [...authRouter, ...routes],
 })
-
+export const menuList = routes;
 export default router

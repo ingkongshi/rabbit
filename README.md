@@ -2,6 +2,30 @@
 前端项目
 
 
+
+## 项目介绍
+### admin 为后台代码
+
+技术栈： 
+
+1. vue3
+2. pinia
+3. vue-router
+4. element-plus
+
+### mobile-uni 为c端代码
+
+技术栈：
+
+1. vue3
+2. pinia
+3. uniapp
+
+
+
+
+
+
 一个后台+一个c端
 ### 后台
 #### 登录 && 注册
