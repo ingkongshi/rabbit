@@ -16,6 +16,7 @@
     </div>
   </template>
   <script  setup>
+    import { login } from '../services/api.js'
     import { reactive, ref } from 'vue'
     import { useAccountStore } from '@/stores/account'
     import { useRouter } from 'vue-router'
@@ -46,6 +47,10 @@
                 localStorage.setItem("token",  token)
                 store.saveUserInfo({ account: ruleForm.account, password: ruleForm.password, token })
                 router.push({ path: '/' })
+                
+                //  login({ account: ruleForm.account, password: ruleForm.password }).then(res => {
+                //   // 登录成功
+                //  })
             } else {
                 console.log('error submit!', fields)
             }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import layout from '../components/layout.vue'
 
+// 权限路由  
 const authRouter = [
   {
     path: '/login',
@@ -11,6 +12,7 @@ const authRouter = [
     component: () => import('../views/login.vue'),
   },
 ]
+// 基本路由
 const routes = [
   {
     path: '/',
@@ -46,7 +48,7 @@ const routes = [
         component: () => import("../views/AboutView.vue"),
         meta: {
           title: '关于',
-          hideMenu: true,
+          hideMenu: false,
         }
       }
     ]
@@ -59,11 +61,40 @@ const routes = [
       title: '会员'
     },
   },
+  {
+    path: '',
+    name: 'Welcome',
+    component: layout,
+    redirect: '/welcome',
+    meta: {
+      title: 'welcome'
+    },
+    children: [
+      {
+        path: 'welcomeIndex',
+        name: 'WelcomeIndex',
+        component: () => import("../views/Welcome/index.vue"),
+        meta: {
+          title: 'welcome',
+        }
+      },
+      {
+        path: 'welcomeDetail',
+        name: 'WelcomeDetail',
+        component: () => import("../views/Welcome/detail.vue"),
+        hideMenu: true,
+        meta: {
+          title: 'welcomeDetail',
+        }
+      },
+    ]
+  },
 ]
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // 分开是为了侧边栏好生成
   routes: [...authRouter, ...routes],
 })
 export const menuList = routes;

@@ -6,15 +6,17 @@
         <el-menu default-active="2"   @open="handleOpen"  @close="handleClose">
             <template v-for="(route, index) in menuList">
                 <template v-if="route.children">
-                    <el-sub-menu :index="route.path">
+                    <el-sub-menu :index="route.name">
                         <template #title>
                             <span>{{route.meta.title}}</span>
                         </template>
-                        <el-menu-item v-for="(children, index) in route.children" :index="children.path" @click="handleClick(children.path)">{{children.meta.title}}</el-menu-item>
+                        <template v-for="(children, index) in route.children">
+                          <el-menu-item v-if="!children.hideMenu" :index="children.name" @click="handleClick(children.path, children)">{{children.meta.title}} </el-menu-item>
+                        </template>
                     </el-sub-menu>
                 </template>
                 <template v-else>
-                    <el-menu-item :index="route.path" @click="handleClick(route.path)">
+                    <el-menu-item :index="route.name" @click="handleClick(route.path)">
                         <span>{{route.meta.title}}</span>
                     </el-menu-item>
                 </template>
@@ -23,11 +25,14 @@
       </el-aside>
       <el-container>
         <el-main>
-          <RouterView #default="{ Component, route }">
+          <keep-alive>
+            <RouterView />
+          </keep-alive>
+          <!-- <RouterView #default="{ Component, route }">
             <keep-alive>
               <component :is="Component" :key="route.fullPath" />
             </keep-alive>
-          </RouterView>
+          </RouterView> -->
         </el-main>
         <el-footer>Footer</el-footer>
       </el-container>
