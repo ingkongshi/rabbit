@@ -11,17 +11,22 @@ This template should help get you started developing with Vue 3 in Vite.
 See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
+在终端输入
+
+安装依赖
 
 ```sh
 pnpm install
 ```
 
 ### Compile and Hot-Reload for Development
+运行
 
 ```sh
 pnpm dev
 ```
 
+打包
 ### Compile and Minify for Production
 
 ```sh

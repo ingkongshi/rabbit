@@ -1,14 +1,23 @@
+ //  引入 createRouter 和 createWebHistory 实例函数 
+ // createRouter 创建路由
+ // createWebHistory 创建 history 路由模式
 import { createRouter, createWebHistory } from 'vue-router'
+// 引入布局组件
 import layout from '../components/layout.vue'
 
 // 权限路由  
 const authRouter = [
   {
+    // 路由路径
     path: '/login',
+    // 路由name
     name: 'Login',
+    // 路由元信息 额外参数
     meta: {
+      // 路由标题 通过路由守卫 动态设置 当前页面的标题 
       title: '登录'
     },
+    // 路由组件
     component: () => import('../views/login.vue'),
   },
 ]

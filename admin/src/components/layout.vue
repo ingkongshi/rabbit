@@ -1,8 +1,15 @@
 <template>
+  <!-- layout 使用element 的 布局方案 -->
+
+  <!-- element-ui 的 container 组件 -->
   <el-container>
+    <!-- element-ui 的 header 组件 -->
     <el-header>Header</el-header>
     <el-container>
+
+    <!-- element-ui 的 el-aside 组件 -->
       <el-aside width="200px">
+        <!-- element-ui 的 el-menu 组件 -->
         <el-menu default-active="2"   @open="handleOpen"  @close="handleClose">
             <template v-for="(route, index) in menuList">
                 <template v-if="route.children">
@@ -24,16 +31,12 @@
         </el-menu>
       </el-aside>
       <el-container>
+        <!-- element-ui 的 el-main 组件 -->
         <el-main>
-          <keep-alive>
-            <RouterView />
-          </keep-alive>
-          <!-- <RouterView #default="{ Component, route }">
-            <keep-alive>
-              <component :is="Component" :key="route.fullPath" />
-            </keep-alive>
-          </RouterView> -->
+          <!-- main 区域渲染 当前 URL 路径对应的路由组件 -->
+          <RouterView />
         </el-main>
+        <!-- element-ui 的 el-footer 组件 -->
         <el-footer>Footer</el-footer>
       </el-container>
     </el-container>

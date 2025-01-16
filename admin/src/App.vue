@@ -1,23 +1,10 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+  // 引入 RouterView 组件
+  // RouterView 可以使 Vue Router 知道你想要在哪里渲染当前 URL 路径对应的路由组件
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <!-- <header>
-
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
-
   <RouterView />
 </template>
 
