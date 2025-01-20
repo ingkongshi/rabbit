@@ -1,5 +1,6 @@
+// 引入 axios 构造函数
 import axios from "axios";
-
+// 导出 request 函数，用于封装 axios 请求
 export function request(config) {
   /**
    * @description axios初始化

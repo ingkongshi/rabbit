@@ -23,12 +23,12 @@ pnpm install
 运行
 
 ```sh
-pnpm dev
+pnpm run dev
 ```
 
 打包
 ### Compile and Minify for Production
 
 ```sh
-pnpm build
+pnpm run build
 ```

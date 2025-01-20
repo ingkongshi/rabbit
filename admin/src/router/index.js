@@ -98,6 +98,26 @@ const routes = [
       },
     ]
   },
+  {
+    path: '',
+    name: 'product',
+    component: layout,
+    redirect: '/product',
+    meta: {
+      title: '商品'
+    },
+    children: [
+      {
+        path: 'product',
+        name: 'Product',
+        component: () => import("../views/product/product.vue"),
+        meta: {
+          title: '商品',
+          hideMenu: false,
+        }
+      }
+    ]
+  },
 ]
 
 
