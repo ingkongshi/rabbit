@@ -8,9 +8,9 @@
     <el-container>
 
     <!-- element-ui 的 el-aside 组件 -->
-      <el-aside width="200px">
+      <el-aside>
         <!-- element-ui 的 el-menu 组件 -->
-        <el-menu default-active="2"   @open="handleOpen"  @close="handleClose">
+        <el-menu class="menuView" default-active="2"   @open="handleOpen"  @close="handleClose">
             <template v-for="(route, index) in menuList">
                 <template v-if="route.children">
                     <el-sub-menu :index="route.name">
@@ -30,7 +30,7 @@
             </template>
         </el-menu>
       </el-aside>
-      <el-container>
+      <el-container class="mainContainer">
         <!-- element-ui 的 el-main 组件 -->
         <el-main>
           <!-- main 区域渲染 当前 URL 路径对应的路由组件 -->
@@ -61,7 +61,11 @@
     }
 </script>
 <style lang="less" scoped>
- .el-header, .el-footer, .el-main,.el-aside {
+  .menuView {
+    width: 100%;
+    align-self: flex-start;
+  }
+ .el-header, .el-footer,.el-aside {
     display: flex;
     justify-content: center;
     align-items: center
@@ -76,17 +80,25 @@
  .el-aside {
     background-color: var(--el-color-primary-light-8);
     color: var(--el-text-color-primary);
-    text-align: center
+    text-align: center;
+    width: 150px;
 }
 
  .el-main {
-    background-color: var(--el-color-primary-light-9);
+    background: #fff;
     color: var(--el-text-color-primary);
     text-align: center;
     height: calc(100vh - 120px);
     padding: 20px;
     box-sizing: border-box;
+    box-shadow: var(--el-box-shadow-light);
+    border-radius: 4px;
 }   
+.mainContainer {
+  padding: 20px;
+  box-sizing: border-box;
+  background: #F5F7F9;
+}
 
 
 </style>

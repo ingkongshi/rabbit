@@ -2,10 +2,20 @@
   // 引入 RouterView 组件
   // RouterView 可以使 Vue Router 知道你想要在哪里渲染当前 URL 路径对应的路由组件
 import { RouterView } from 'vue-router'
+
+import { computed, ref } from 'vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+const language = ref('zh-cn')
+const locale = computed(() => (language.value === 'zh-cn' ? zhCn : en))
+const toggle = () => {
+  language.value = language.value === 'zh-cn' ? 'en' : 'zh-cn'
+}
 </script>
 
 <template>
-  <RouterView />
+  <el-config-provider :locale="locale">
+    <RouterView />
+  </el-config-provider>
 </template>
 
 <style lang="less" scoped>

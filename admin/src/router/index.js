@@ -62,14 +62,14 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/member',
-    name: 'Member',
-    component: () => import("../views/member/member.vue"),
-    meta: {
-      title: '会员'
-    },
-  },
+  // {
+  //   path: '/member',
+  //   name: 'Member',
+  //   component: () => import("../views/member/member.vue"),
+  //   meta: {
+  //     title: '会员'
+  //   },
+  // },
   {
     path: '',
     name: 'Welcome',
@@ -116,7 +116,27 @@ const routes = [
           hideMenu: false,
         }
       }
-    ]
+    ],
+    },
+    {
+      path: '',
+      name: 'example',
+      component: layout,
+      redirect: '/demo',
+      meta: {
+        title: '示例'
+      },
+      children: [
+        {
+          path: 'demo',
+          name: 'demo',
+          component: () => import("../views/demo/index.vue"),
+          meta: {
+            title: 'demo',
+            hideMenu: false,
+          }
+        }
+      ]
   },
 ]
 

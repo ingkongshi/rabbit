@@ -47,7 +47,7 @@
                 const token = ruleForm.account + ruleForm.password
                 localStorage.setItem("token",  token)
                 store.saveUserInfo({ account: ruleForm.account, password: ruleForm.password, token })
-                router.push({ path: '/' })
+                router.push({ path: '/home' })
                 
                 //  login({ account: ruleForm.account, password: ruleForm.password }).then(res => {
                 //   // 登录成功
