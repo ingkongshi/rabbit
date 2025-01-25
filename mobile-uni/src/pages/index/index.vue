@@ -3,13 +3,13 @@
     <view class="uni-margin-wrap">
 			<swiper class="swiper" circular autoplay  indicatorDots :interval="interval">
 				<swiper-item>
-					<view class="swiper-item uni-bg-red">A</view>
+					<view class="swiper-item uni-bg-red">轮播图1</view>
 				</swiper-item>
 				<swiper-item>
-					<view class="swiper-item uni-bg-green">B</view>
+					<view class="swiper-item uni-bg-green">轮播图2</view>
 				</swiper-item>
 				<swiper-item>
-					<view class="swiper-item uni-bg-blue">C</view>
+					<view class="swiper-item uni-bg-blue">轮播图3</view>
 				</swiper-item>
 			</swiper>
 		</view>
