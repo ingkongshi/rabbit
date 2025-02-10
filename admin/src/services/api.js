@@ -9,13 +9,11 @@ export function productList(options) {
 }
 
 export function testApi(options) {
-  options = {
-    account: 'admin111',
-    password: '123456'
-  }
   return request({ url: "/register", method: "post", data: options });
 }
 
 export function upload(options) {
-  return request({ url: "/upload", method: "post", data: options });
+  return request({ url: "/upload", method: "post", data: options,  headers: {
+    'Content-Type': '`multipart/form-data'
+  }, });
 }

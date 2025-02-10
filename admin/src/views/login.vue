@@ -60,11 +60,15 @@
         } totally`
       )
     }
-    const uploadFile = async (file) => {
-      console.log('开始上传 ', file);
+    const uploadFile = async (data) => {
+      console.log('开始上传 ', data.file);
+      console.log('开始上传 ', fileList.value[0]);
       const form = new FormData()
-      form.append('file', file)
-
+      form.append('file', data.file)
+      upload(form).then(res => {
+        console.log('res: ', res);
+        
+      })
     }
 
     const beforeRemove = (uploadFile, uploadFiles) => {

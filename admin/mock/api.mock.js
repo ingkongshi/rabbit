@@ -125,6 +125,7 @@ const upload = {
     method: 'POST',
     body(req) {
       const body = req.body
+      console.log('body: ', body);
       return resultSuccess({
         list: body.files.map((file) => file.originalFilename)
       }, '上传成功')
