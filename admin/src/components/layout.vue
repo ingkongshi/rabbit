@@ -4,7 +4,10 @@
   <!-- element-ui 的 container 组件 -->
   <el-container>
     <!-- element-ui 的 header 组件 -->
-    <el-header>Header</el-header>
+    <el-header>
+      Header
+      <el-button type="primary" @click="signOut"> 退出 </el-button>
+    </el-header>
     <el-container>
 
     <!-- element-ui 的 el-aside 组件 -->
@@ -58,6 +61,10 @@
         console.log(key)
 
         router.push({path:key})
+    }
+    const signOut = () => {
+        localStorage.removeItem("token");
+        router.push({path:"/login"})
     }
 </script>
 <style lang="less" scoped>

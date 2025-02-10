@@ -13,30 +13,92 @@
             <el-button type="primary" @click="submitForm(loginFormRef)"> 登录 </el-button>
         </el-form-item>
       </el-form>
+
+      <el-upload
+        v-model:file-list="fileList"
+        action="#"
+        multiple
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :before-remove="beforeRemove"
+        :limit="1"
+        :on-exceed="handleExceed"
+        :http-request="uploadFile"
+      >
+        <el-button type="primary">Click to upload</el-button>
+        <template #tip>
+          <div class="el-upload__tip">
+            jpg/png files with a size less than 500KB.
+          </div>
+        </template>
+      </el-upload>
+
+      <el-button type="primary" @click="test"> 测试 </el-button>
     </div>
   </template>
   <script  setup>
     // 引入 登录 api 
-    import { login } from '../services/api.js'
+    import { login, testApi, upload } from '../services/api.js'
     import { reactive, ref } from 'vue'
     import { useAccountStore } from '@/stores/account'
     import { useRouter } from 'vue-router'
+
+    import { ElMessage, ElMessageBox } from 'element-plus'
+    const fileList = ref([])
+    const handleRemove = (file, uploadFiles) => {
+      console.log(file, uploadFiles)
+    }
+
+    const handlePreview = (uploadFile) => {
+      console.log(uploadFile)
+    }
+
+    const handleExceed = (files, uploadFiles) => {
+      ElMessage.warning(
+        `The limit is 3, you selected ${files.length} files this time, add up to ${
+          files.length + uploadFiles.length
+        } totally`
+      )
+    }
+    const uploadFile = async (file) => {
+      console.log('开始上传 ', file);
+      const form = new FormData()
+      form.append('file', file)
+
+    }
+
+    const beforeRemove = (uploadFile, uploadFiles) => {
+      return ElMessageBox.confirm(
+        `Cancel the transfer of ${uploadFile.name} ?`
+      ).then(
+        () => true,
+        () => false
+      )
+    }
+
     const router = useRouter()
     const store = useAccountStore()
+    const test = async () => {
+       try {
+         const res = await testApi()
+         console.log('testApi: ', res);
+       } catch (error) {
+       }
+    }
 
     const loginFormRef = ref()
     const ruleForm = reactive({
-      account: '',
-      password: ''
+      account: 'admin',
+      password: '123456'
     })
     const rules = reactive({
       account: [
         { required: true, message: '请输入账号', trigger: 'blur' },
-        { min: 3, max: 5, message: '长度应该为3到5个字符', trigger: 'blur' },
+        { min: 1, max: 10, message: '长度应该为3到5个字符', trigger: 'blur' },
       ],
       password: [
         { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 3, max: 5, message: '长度应该为3到5个字符', trigger: 'blur' },
+        { min: 1, max: 10, message: '长度应该为3到5个字符', trigger: 'blur' },
       ],
     })
 
@@ -44,14 +106,12 @@
         if (!formEl) return
         await formEl.validate((valid, fields) => {
             if (valid) {
-                const token = ruleForm.account + ruleForm.password
-                localStorage.setItem("token",  token)
-                store.saveUserInfo({ account: ruleForm.account, password: ruleForm.password, token })
-                router.push({ path: '/home' })
-                
-                //  login({ account: ruleForm.account, password: ruleForm.password }).then(res => {
-                //   // 登录成功
-                //  })
+                 login({ account: ruleForm.account, password: ruleForm.password }).then(res => {
+                    const {data} =res
+                    localStorage.setItem("token",  data.token)
+                    store.saveUserInfo(data.user)
+                    router.push({ path: '/home' })
+                 })
             } else {
                 console.log('error submit!', fields)
             }

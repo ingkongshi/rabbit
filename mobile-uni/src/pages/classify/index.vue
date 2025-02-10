@@ -1,4 +1,6 @@
 <template>
+  <view>
+    <view class="search">搜索</view>
     <view class="classify">
       <!-- <text class="title">{{ counter.count }}</text>
       <view class="button" @tap="onAdd">ADD</view> -->
@@ -13,6 +15,7 @@
         <productListItem v-for="v in productList" :data="v" @button-event="handleClick"></productListItem>
       </scroll-view>
     </view>
+  </view>
   </template>
   
   <script setup>
@@ -88,6 +91,12 @@
   </script>
 
   <style scoped>
+    .search {
+      height: 80rpx;
+      line-height: 80rpx;
+      text-align: center;
+      background-color: #d1d1d1;
+    }
     uni-page-body {
       height: 100%;
     }
