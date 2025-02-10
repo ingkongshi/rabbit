@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "sankeyangshu.vscode-javascript-typescript-snippets",
+    "sankeyangshu.vscode-react-collection-snippets",
+    "antfu.unocss",
+    "dbaeumer.vscode-eslint",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "usernamehw.errorlens"
+  ]
+}

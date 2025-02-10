@@ -12,10 +12,6 @@ node_modules
 dist
 dist-ssr
 coverage
-vue-vben-admin-main
-template-vue-main-style1
-template-vue-main
-template-react-main
 *.local
 
 /cypress/videos/
