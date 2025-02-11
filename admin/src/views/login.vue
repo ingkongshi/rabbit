@@ -17,21 +17,18 @@
       <el-upload
         v-model:file-list="fileList"
         action="#"
-        multiple
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
         :limit="1"
         :on-exceed="handleExceed"
         :http-request="uploadFile"
       >
-        <el-button type="primary">Click to upload</el-button>
+        <el-button type="primary">上传图片</el-button>
         <template #tip>
           <div class="el-upload__tip">
             jpg/png files with a size less than 500KB.
           </div>
         </template>
       </el-upload>
+      <el-image v-if="uploafurl" style="width: 100px; height: 100px" :src="uploafurl" />
 
       <el-button type="primary" @click="test"> 测试 </el-button>
     </div>
@@ -45,39 +42,17 @@
 
     import { ElMessage, ElMessageBox } from 'element-plus'
     const fileList = ref([])
-    const handleRemove = (file, uploadFiles) => {
-      console.log(file, uploadFiles)
-    }
-
-    const handlePreview = (uploadFile) => {
-      console.log(uploadFile)
-    }
+    const uploafurl = ref('')
 
     const handleExceed = (files, uploadFiles) => {
-      ElMessage.warning(
-        `The limit is 3, you selected ${files.length} files this time, add up to ${
-          files.length + uploadFiles.length
-        } totally`
-      )
+      ElMessage.warning('最多一张' )
     }
     const uploadFile = async (data) => {
-      console.log('开始上传 ', data.file);
-      console.log('开始上传 ', fileList.value[0]);
       const form = new FormData()
       form.append('file', data.file)
       upload(form).then(res => {
-        console.log('res: ', res);
-        
+        uploafurl.value = res.data.url
       })
-    }
-
-    const beforeRemove = (uploadFile, uploadFiles) => {
-      return ElMessageBox.confirm(
-        `Cancel the transfer of ${uploadFile.name} ?`
-      ).then(
-        () => true,
-        () => false
-      )
     }
 
     const router = useRouter()

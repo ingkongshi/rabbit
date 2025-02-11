@@ -2,8 +2,7 @@ import { defineMock } from 'vite-plugin-mock-dev-server'
 import Mock from 'mockjs';
 
 
-const Random = Mock.Random
-const mockFn = Mock.mock
+const Random = Mock.Random;
 
 // 定义一个名为 resultSuccess 的函数，用于生成成功的响应结果
 function resultSuccess(result, message = 'success') {
@@ -125,14 +124,34 @@ const upload = {
     method: 'POST',
     body(req) {
       const body = req.body
-      console.log('body: ', body);
       return resultSuccess({
-        list: body.files.map((file) => file.originalFilename)
+        url: Random.image('200x200', Random.color(), '#FFF', 'upload-success'),
+        fileName: body.file.originalFilename,
       }, '上传成功')
     },
 }
+
+// H5轮播图
+const mockH5Banner = [
+  {
+    url: '/api/banner/list',
+    method: 'GET',
+    delay: 500,
+    body: () => {
+      const list = Mock.mock({
+        'array|30': [{
+          'id|+1': 1, 
+          'url': Random.image('375x150', Random.color()),
+          'name': '@name'
+        }]
+      });
+      return resultSuccess(list.array);
+    },
+  }
+]
 const mockList =  [
-    mockLogin, mockLogout,register,
+    mockLogin, mockLogout,register,upload,
+    ...mockH5Banner,
 ]
 
 export default defineMock(mockList)

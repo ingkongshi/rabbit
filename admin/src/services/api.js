@@ -9,11 +9,9 @@ export function productList(options) {
 }
 
 export function testApi(options) {
-  return request({ url: "/register", method: "post", data: options });
+  return request({ url: "/banner/list", method: "GET", data: options });
 }
 
 export function upload(options) {
-  return request({ url: "/upload", method: "post", data: options,  headers: {
-    'Content-Type': '`multipart/form-data'
-  }, });
+  return request({ url: "/upload", method: "post", data: options,  headers: { 'Content-Type': '`multipart/form-data' }, });
 }
