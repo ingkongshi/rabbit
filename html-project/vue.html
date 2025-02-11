@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <!-- 
+                header 区域 商品搜索框
+                1. 使用 v-model 指令绑定输入框的值到变量 searchValue
+                2. 根据输入内容 从商品列表筛选出匹配的商品列表
+            -->
+        </header>
+
+        <main>
+            <!-- 
+                主区域
+                1. 使用v-if指令渲染tab内容 当前点击的tab是商品列表则展示商品列表，否则展示商品订单;
+                2. 使用 v-for 指令渲染商品列表\商品订单 
+            -->
+
+            <div v-if="currentTab === '商品列表'">
+                商品列表
+            </div>
+            <div v-else>
+                商品订单
+            </div>
+        </main>
+
+        <section>
+            <!-- 
+                底部 tab 区域
+                使用 ref 创建 tabList， 当前tab的激活状态
+                使用 v-for 指令渲染tab列表;
+                使用事件绑定指令 v-on:click 绑定tab点击事件; 
+                使用 属性绑定 指令 v-bind:class 绑定tab激活状态
+            -->
+            <div class="tabList">
+                <div class="tabItem">商品列表</div>
+                <div class="tabItem">商品订单</div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="./js/productData.js"></script>
+    <script>
+        console.log('productList: ', productList);
+
+    </script>
+</body>
+</html>

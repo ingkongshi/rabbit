@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>呐呐呐,你看到我了</title>
+
+    <!-- 引入css样式 -->
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <h5>不使用vue</h5>
+
+    <!-- ref 示例 -->
+    <section>
+        <p class="title"></p>
+        <button onclick="jsEdit()">修改message</button>
+    </section>
+
+    <!-- v-model 示例 -->
+    <section>
+        <input type="text" id="inputField">
+        <p id="displayField"></p>
+    </section>
+
+    <!-- 事件绑定 示例 -->
+    <section>
+        <p class="conut"></p>
+        <button onclick="handleClick()">点击</button>
+    </section>
+
+    <!-- 条件渲染 示例 -->
+    <section>
+        <p class="account"></p>
+        <button onclick="showAccount()">切换</button>
+    </section>
+
+    <!-- 列表渲染 示例 -->
+    <section>    
+        <ul class="list"></ul>
+    </section>
+
+    <!-- 属性绑定 示例 -->
+    <section>
+        <img class="img" />
+        <div class="static">属性绑定</div>
+        <button onclick="switchClass()">切换</button>
+    </section>
+
+    <hr />
+
+    <h5>使用vue</h5>
+    <div id="app">
+
+        <!-- ref 示例 -->
+        <section>
+           <p>{{ message }}</p>
+           <button @click="edit">修改message</button>
+        </section>
+
+        <!-- v-model 示例 -->
+        <section>
+            <input type="text" v-model="inputValue" />
+            <p>{{ inputValue }}</p>
+        </section>
+
+        <!-- 事件绑定 示例 -->
+        <section>
+            <p>Count is: {{ count }}</p>
+            <!-- 直接写 JavaScript 语句   用于简单场景  -->
+            <button @click="count ++ ">点击</button>
+
+            <!-- 通过方法处理事件 -->
+            <button @click="handleClick">点击</button>
+        </section>
+
+         <!-- 条件渲染 示例 -->
+         <section>
+            <div v-if="account === 'admin'">管理员</div>
+            <div v-else-if="account === 'superadmin'">超级管理员</div>
+            <div v-else>普通用户</div>
+            <button @click="showAccount">切换</button>
+         </section>
+
+        <!-- 列表渲染 示例 -->
+         <section>
+            <ul> 
+                <!-- index表示索引 -->
+                <li v-for="(item, index) in list" :key='index'>
+                  {{ item.message }}  -- {{ index }}
+                </li>
+            </ul>
+         </section>
+
+         <!-- 属性绑定 示例 -->
+         <section>
+            <!-- 绑定 attribute -->
+            <img v-bind:src="imageSrc" />
+
+            <!-- 缩写 -->
+            <img :src="imageSrc" />
+
+            <div class="static" :class="{ active: isActive, 'text-danger': hasError }">
+                属性绑定
+            </div>
+            <button @click="isActive = !isActive; hasError = !hasError">切换</button>
+        </section>
+
+    </div>
+  </body>
+
+  <!-- 引入js文件 -->
+  <script src="./js/vue.global.js"></script>
+  <script src="./js/vue.js"></script>
+  <script src="./js/javascript.js"></script>
+
+  <!-- vue js代码块 -->
+  <script>
+    const { createApp, ref } = Vue;
+    // vue 实例参数
+    const appOptions ={
+        // setup 是 Vue 3 中的入口函数； 用于设置初始状态和逻辑。
+        setup() {
+        // 使用 ref 创建一个响应式数据，同时给它一个默认值 'Hello vue!' ； ref 返回的对象有一个 value 属性，通过这个属性可以访问或修改响应式数据的值。
+        const message = ref("Hello vue!");
+        // v-model 的 ref
+        const inputValue = ref("输入框默认值")
+        // 点击事件 的 ref
+        const count = ref(0)
+        // v-if 的 ref
+        const account = ref('admin')
+        // v-for 的 ref
+        const list = ref([
+            { message: 'Foo' }, 
+            { message: 'Bar' }
+        ])
+        // 属性绑定的 ref
+        const imageSrc = ref('https://vuejs.org/images/logo.png')
+        const isActive = ref(true)
+        const hasError = ref(false)
+
+
+
+        // 按钮点击函数
+        function edit(event) {
+            message.value = "Hello vue! 修改了" + new Date().getTime();
+        }
+
+        // 创建点击函数  处理点击事件
+        const handleClick = () => {
+            // 修改 count 的值
+            count.value ++ 
+        }
+
+        const showAccount = () => {
+            const list = ['admin', 'superadmin', 'user']
+            account.value = list[Math.floor(Math.random() * list.length)];
+        }
+
+        // 返回对象，将数据，方法交出去； 对象中的内容，可直接在模板(html)中使用。
+        return {
+          message, edit,
+          inputValue,
+          count, handleClick,
+          account,showAccount,
+          list,
+          imageSrc,isActive, hasError,
+        };
+      },
+    }
+
+
+    // 创建一个 Vue 应用实例
+    // createApp 函数接收一个对象作为参数，这个对象定义了 Vue 应用的配置。
+    // mount 方法用于将 Vue 应用实例挂载到一个 DOM 元素上。在这个例子中，应用被挂载到 id 为 app 的元素上。
+    createApp(appOptions).mount("#app");
+
+
+    // var Vue = function () {
+    //     function createApp (options) {
+    //         console.log('options: ', options);
+    //         return Vue
+    //     }
+    //     function ref(value) {
+    //         console.log('value: ', value);
+    //     }
+    //     function mount(el) {
+    //         console.log(el)
+    //     }
+    //     return {
+    //         createApp,
+    //         ref,
+    //         mount
+    //     }
+    // }()
+    // const { createApp, ref } = Vue
+    // const app = createApp({
+    //     setup() {
+    //         const count = ref(0)
+    //         return {
+    //             count
+    //         }
+    //     }
+    // })
+    // console.log('app: ', app);
+    // app.mount('#app')
+
+    
+  </script>
+
+  <!-- 原生js代码块 -->
+
+  <script>
+
+    // ----------------ref -----------------
+    // 获取元素
+    const titleBox = document.querySelector(".title")
+    // 修改元素内容
+    titleBox.innerHTML = "Hello vue!";
+    function jsEdit(event) {
+        titleBox.innerHTML = "Hello vue! 修改了" + new Date().getTime();
+    }
+
+    // ----------------v-model -----------------
+    // 获取输入框和显示内容的元素
+    const inputField = document.getElementById('inputField');
+    const displayField = document.getElementById('displayField');
+
+    // 定义一个数据对象
+    const data = {
+        text: '输入框默认值'
+    };
+
+    // 监听输入框的输入事件
+    inputField.addEventListener('input', function(event) {
+        data.text = event.target.value;
+        updateView();
+    });
+
+    // 更新视图函数
+    function updateView() {
+        displayField.textContent = data.text;
+    }
+
+    // 初始化视图
+    updateView();
+
+
+    // ----------------事件绑定 -----------------
+    let count = 0
+    const conutBox = document.querySelector(".conut")
+    conutBox.innerHTML = 'Count is: ' + count
+    function handleClick() {
+        conutBox.innerHTML = 'Count is: ' + (count ++)
+    }
+
+
+    // ----------------条件渲染-----------------
+    var account = 'admin'
+    const accountBox = document.querySelector(".account")
+    function showAccount() {
+        const list = ['admin', 'superadmin', 'user']
+        account = list[Math.floor(Math.random() * list.length)];
+        if (account === 'admin') {
+            accountBox.innerHTML = '管理员'
+        } else if (account === 'superadmin'){
+            accountBox.innerHTML = '超级管理员'
+        } else {
+            accountBox.innerHTML = '普通用户'
+        }
+    }
+    showAccount()
+
+    // ----------------列表渲染-----------------
+    const list = [
+        { message: 'Foo' }, 
+        { message: 'Bar' }
+    ]
+    const listBox = document.querySelector(".list")
+    let listHtml = ''
+    for (let i = 0; i < list.length; i++) {
+        listHtml += `<li>${ list[i].message} -- ${i}</li>`
+    }
+    listBox.innerHTML = listHtml
+
+
+    // ----------------属性绑定-----------------
+    const img = document.querySelector(".img")
+    img.src = 'https://vuejs.org/images/logo.png'
+
+    let isActive = true
+    let hasError = false
+    const staticBox = document.querySelector(".static")
+    if(isActive) {
+        staticBox.classList.add('active')
+    }
+    if(hasError) {
+        staticBox.classList.add('text-danger')
+    }
+
+    function switchClass() {
+        // 如果元素有这个类，就移除它；如果没有，就添加它
+        staticBox.classList.toggle('active')
+        staticBox.classList.toggle('text-danger')
+    }
+
+  </script>
+</html>

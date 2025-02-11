@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    padding: 30px;
+    box-sizing: border-box;
+}
+.title {
+    color: #000;
+    font-size: 20px;
+}
+hr {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+p {
+    margin: 10px 0;
+}
+section {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+}
+.subtitle{
+    color: #606266;
+    margin: 5px 0;
+} 
+
+img {
+    width: 80px;
+    height: 80px;
+    margin:  0 10px;
+}
+
+.static {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    color: #000;
+    background-color: #ddd;
+}
+.active {
+    background-color: #409EFF;
+}
+
+.text-danger {
+    color: #F56C6C;
+}
+
+button {
+    margin: 5px;
+}
