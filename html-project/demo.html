@@ -134,7 +134,7 @@
         ])
         const currentTab = ref('list');
         const orderList = ref([]);
-        const orderCache = []
+        let orderCache = []
 
         const toSearch = () => {
             if (searchValue.value === "") {
